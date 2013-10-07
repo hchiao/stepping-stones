@@ -1,5 +1,10 @@
 <h1>Client Form</h1>
-
 <p><%= @rules.map{|x| x.lnr} %></p>
+
+<%= helper_link @rules %>
+<%= form_tag :action => 'parse_client', :method => 'post' do %>
+    <div id="org"></div>
+    <%= submit_tag("Submit") %>
+<%end%>
 
 <%= link_to 'Create Rules', path_customize_path_path %>

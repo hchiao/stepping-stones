@@ -19,7 +19,7 @@ var SELECT_FALSE = "f";
 var ruleCount = 1;
 function initRule(appendTo, count, pastName) {
     var ruleStart = "r" + ruleCount;
-    addRule(org, 1, ruleStart);
+    addRule(appendTo, 1, ruleStart);
     ruleCount++;
 };
 

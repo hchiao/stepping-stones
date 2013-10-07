@@ -13,6 +13,11 @@ class PathController < ApplicationController
 
   def client_form
     @rules = session[:rules]
+
+  end
+
+  def parse_client
+    redirect_to path_show_path_path
   end
 
 end

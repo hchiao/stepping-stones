@@ -3,6 +3,7 @@ SteppingStones::Application.routes.draw do
   get "path/customize_path"
   get "path/client_form"
   post "path/parse_path"
+  post "path/parse_client"
 
   root "path#show_path"
   # The priority is based upon order of creation: first created -> highest priority.
