@@ -3,7 +3,6 @@ var SELECT = "select";
 var OPTION = "option";
 var LI = "li";
 var UL = "ul";
-var DIV = "div";
 var TYPE = "type";
 var VALUE = "value";
 var CLASS = "class";
@@ -17,7 +16,7 @@ var SELECT_TRUE = "t";
 var SELECT_FALSE = "f";
 
 var ruleCount = 1;
-function initRule(appendTo, count, pastName) {
+function initRule(appendTo) {
     var ruleStart = "r" + ruleCount;
     addRule(appendTo, 1, ruleStart);
     ruleCount++;
