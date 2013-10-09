@@ -3,9 +3,22 @@ var NAME = "name";
 var UL = "ul";
 var LI = "li";
 
-// Need to get the id's right for all
+function getRules(){
+    var request = new XMLHttpRequest;
+    request.onreadystatechange = function() {
+        if(request.readyState == 4){
+            alert(request.responseText);
+            var myRules = JSON.parse(request.responseText);
+            alert(myRules[0].true_path);
+        }
+    };
 
-function newQuestion(appendTo, liName, question){ // signeture needs to change for recursion
+    request.open("GET", "?format=json", true);
+    request.send(null);
+};
+
+
+function newQuestion(appendTo, liName, question){
     var li = liTag(liName);
     questionContext(li, question, liName);
     appendTo.appendChild(li);
@@ -26,9 +39,17 @@ function radioTag(pastName, value){
     radioInput.setAttribute('type', 'radio');
     radioInput.setAttribute('name', pastName);
     radioInput.setAttribute('value', value);
-    radioInput.setAttribute('onclick','newQuestion(' + pastName + 'u, "' + value + '", "nestedQ2" )');
-    //radioInput.onclick = function() {alert(value);};  // for IE
+
+    var nestedQuestion = 'newQuestion(' + pastName + 'u, "' + value + '", "' + getNestedQuestion(value) + '")'
+    // stop when reached leaf
+    radioInput.setAttribute('onclick', nestedQuestion);
+    //radioInput.onclick = function() {nestedQuestion};  // for IE
     return radioInput;
+};
+
+function getNestedQuestion(value){
+   //make ajax call!!!!!
+    return ""+value+"";
 };
 
 function labelTag(name){

@@ -13,7 +13,10 @@ class PathController < ApplicationController
 
   def client_form
     @rules = session[:rules]
-
+    respond_to do |format|
+        format.html
+        format.json {render json: @rules.to_json}
+    end
   end
 
   def parse_client
