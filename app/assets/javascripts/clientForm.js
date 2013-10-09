@@ -3,13 +3,13 @@ var NAME = "name";
 var UL = "ul";
 var LI = "li";
 
+
 function getRules(){
     var request = new XMLHttpRequest;
     request.onreadystatechange = function() {
         if(request.readyState == 4){
-            alert(request.responseText);
-            var myRules = JSON.parse(request.responseText);
-            alert(myRules[0].true_path);
+            var rulesObj =  JSON.parse(request.responseText);
+            buildForm(rulesObj);
         }
     };
 
@@ -17,6 +17,14 @@ function getRules(){
     request.send(null);
 };
 
+function buildForm(rulesObj){
+    var count = 1;
+    for( q in rulesObj ){
+        newQuestion(org, "r" + count , rulesObj[q].condition);
+        count++;
+    }
+
+};
 
 function newQuestion(appendTo, liName, question){
     var li = liTag(liName);
