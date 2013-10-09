@@ -5,32 +5,29 @@ var LI = "li";
 
 // Need to get the id's right for all
 
-function clientFormCreate(appendTo){ // signeture needs to change for recursion
-    appendTo.appendChild(newQuestion("r1", "question1")); // dynamicly added according to rule object
+function newQuestion(appendTo, liName, question){ // signeture needs to change for recursion
+    var li = liTag(liName);
+    questionContext(li, question, liName);
+    appendTo.appendChild(li);
 };
 
-function newQuestion(pastName, question){
-    var li = liTag(pastName);
-    questionSet(li, question, pastName);
-    return li;
-};
 
-function questionSet(appendTo, question, pastName){
+function questionContext(appendTo, question, pastName){
     appendTo.appendChild(labelTag(question));
-    appendTo.appendChild(radioTag(pastName + "t1", "true", pastName + "u"));
+    appendTo.appendChild(radioTag(pastName, pastName + "t1"));
     appendTo.appendChild(labelTag("true"));
-    appendTo.appendChild(radioTag(pastName + "f1", "false", pastName + "u"));
+    appendTo.appendChild(radioTag(pastName, pastName + "f1"));
     appendTo.appendChild(labelTag("false"));
     appendTo.appendChild(ulTag(pastName + "u"));
 };
 
-function radioTag(name, value, appendTo){
+function radioTag(pastName, value){
     var radioInput = document.createElement('input');
     radioInput.setAttribute('type', 'radio');
-    radioInput.setAttribute('name', name);
+    radioInput.setAttribute('name', pastName);
     radioInput.setAttribute('value', value);
-    radioInput.setAttribute('onclick','clientFormCreate(' + appendTo + ')');
-    //radioInput.onclick = function() {alert(value);};
+    radioInput.setAttribute('onclick','newQuestion(' + pastName + 'u, "' + value + '", "nestedQ2" )');
+    //radioInput.onclick = function() {alert(value);};  // for IE
     return radioInput;
 };
 
