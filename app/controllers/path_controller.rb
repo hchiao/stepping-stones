@@ -1,5 +1,6 @@
 class PathController < ApplicationController
   def show_path
+      @stuff = params[:stuff]
   end
 
   def customize_path
@@ -20,7 +21,19 @@ class PathController < ApplicationController
   end
 
   def parse_client
-    redirect_to path_show_path_path
+    puts "====================================================="
+    puts params
+
+    @answers = []
+    #TODO 1..10  ->  1..Inf
+    (1..10).each do |x|
+        string = "rule" + x.to_s
+        @answers << params[string]
+    end
+
+    puts @answers
+
+    redirect_to path_show_path_path(stuff: @answers)
   end
 
 end

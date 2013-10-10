@@ -12,35 +12,44 @@ function getRules(){
             buildForm(rulesObj);
         }
     };
-
     request.open("GET", "?format=json", true);
     request.send(null);
 };
 
 function buildForm(rulesObj){
-    var ruleCount = 1;
     for( q in rulesObj ){
-        newQuestion(org, "r" + ruleCount, rulesObj);
-        ruleCount++;
+        newQuestion(org, "r" + (parseInt(q)+1), rulesObj);
     }
-
 };
 
-function newQuestion(appendTo, liName, rulesObj){
-    var li = liTag(liName);
-    questionContext(li, liName, rulesObj);
-    appendTo.appendChild(li);
+function newQuestion(appendTo, pastName, rulesObj){
+    var li = liTag(pastName);
+    var condition = findValue(pastName+"c", rulesObj);
+    if (condition == undefined) {
+        var answer = findValue(pastName + "a", rulesObj);
+        //alert(answer);
+        appendTo.appendChild(hiddenAnswer(pastName,answer));
+    }
+    else{
+        nestedQuestion(li,condition,pastName,rulesObj);
+        appendTo.appendChild(li);
+    }
 };
 
+function hiddenAnswer(path, answer){
+    var ruleNumber = path.match(/(?![r])[1-9]+/);
+    var input = document.createElement("input");
+    input.setAttribute("type", "hidden");
+    input.setAttribute("name", "rule"+ruleNumber);
+    input.setAttribute("value", answer);
+    return input;
+};
 
-function questionContext(appendTo, pastName, rulesObj){
-    //alert(pastName);
+function nestedQuestion(appendTo,condition, pastName,rulesObj){
     var level = getLevel(pastName);
     var true_value = pastName + "t" + (parseInt(level) + 1);
     var false_value = pastName + "f" + (parseInt(level) + 1);
-    //alert(value);
-
-    appendTo.appendChild(labelTag(findCondition(pastName+"c", rulesObj)));
+    appendTo.appendChild(labelTag(condition));
     appendTo.appendChild(radioTag(pastName, true_value, rulesObj));
     appendTo.appendChild(labelTag("true"));
     appendTo.appendChild(radioTag(pastName, false_value, rulesObj));
@@ -49,40 +58,30 @@ function questionContext(appendTo, pastName, rulesObj){
 };
 
 
-function findCondition(path, rulesObj){
-    //alert("path: "+path+"\nrulesObj: "+rulesObj);
-
-    var array = path.match(/([rtfc][1-9]*)/g);
+function findValue(path, rulesObj){
+    var array = path.match(/([rtfca][1-9]*)/g);
     var ruleNum = array.shift();
     var num = ruleNum.match(/[1-9]+/);
     var index = parseInt(num)-1;
     var ruleObj = rulesObj[index];
-
     var noNumberArray = stripNumbers(array);
-
-    var string = searchCondition(ruleObj, noNumberArray);
-    //alert("returns: "+string);
-
+    var string = searchValue(ruleObj, noNumberArray);
     return string;
 };
 
 
-function searchCondition(rule, array){
-    //alert("ruleObj IN: " + target);
+function searchValue(rule, array){
     var action = array.shift();
-    //alert("action: "+action+"\narray: "+array);
-
+    if(array.length == 1 && array[0] == "a"){
+        return (action == "t") ? rule.true_path : rule.false_path;
+    }
     if(action == "t"){
-        //alert("rule.true_path: "+rule.true_path);
-        return searchCondition(rule.true_path, array);
+        return searchValue(rule.true_path, array);
     }
     else if(action == "f"){
-        //alert("rule.false_path: "+rule.false_path);
-        return searchCondition(rule.false_path, array);
-
+        return searchValue(rule.false_path, array);
     }
     else if(action == "c"){
-        //alert("rule.condition: "+rule.condition);
         return rule.condition;
     }
     else{
@@ -97,7 +96,7 @@ function searchCondition(rule, array){
 function stripNumbers(array){
     var noNumberArray = [];
     for(i in array){
-       noNumberArray.push(array[i].match(/[tfc]/));
+       noNumberArray.push(array[i].match(/[tfca]/));
     }
     return noNumberArray;
 };
