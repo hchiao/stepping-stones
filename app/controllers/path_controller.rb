@@ -22,20 +22,8 @@ class PathController < ApplicationController
 
   Inf = 1.0/0.0
   def parse_client
-    puts "====================================================="
-    puts params
-
-    @answers = []
     ruleValidTo = (1..Inf).each {|x| break x-1 if params.member?("rule" + x.to_s) == false }
-
-
-    @answers = (1..ruleValidTo).inject([]) do |x,y|
-        string = "rule"+y.to_s
-        x << params[string]
-    end
-
-    puts @answers
-
+    @answers = (1..ruleValidTo).inject([]) {|x,y| x << params["rule" + y.to_s]}
     redirect_to path_show_path_path(answers_array: @answers)
   end
 
