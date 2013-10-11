@@ -1,6 +1,9 @@
 class PathController < ApplicationController
   def show_path
       @answers_array = params[:answers_array]
+      if @answers_array.nil? then 
+          @answers_array = []
+      end
   end
 
   def customize_path
