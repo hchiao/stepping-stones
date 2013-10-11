@@ -1,6 +1,6 @@
 class PathController < ApplicationController
   def show_path
-      @stuff = params[:stuff]
+      @answers_array = params[:answers_array]
   end
 
   def customize_path
@@ -20,20 +20,23 @@ class PathController < ApplicationController
     end
   end
 
+  Inf = 1.0/0.0
   def parse_client
     puts "====================================================="
     puts params
 
     @answers = []
-    #TODO 1..10  ->  1..Inf
-    (1..10).each do |x|
-        string = "rule" + x.to_s
-        @answers << params[string]
+    ruleValidTo = (1..Inf).each {|x| break x-1 if params.member?("rule" + x.to_s) == false }
+
+
+    @answers = (1..ruleValidTo).inject([]) do |x,y|
+        string = "rule"+y.to_s
+        x << params[string]
     end
 
     puts @answers
 
-    redirect_to path_show_path_path(stuff: @answers)
+    redirect_to path_show_path_path(answers_array: @answers)
   end
 
 end
