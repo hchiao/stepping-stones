@@ -3,16 +3,14 @@ var NAME = "name";
 var UL = "ul";
 var LI = "li";
 
-
 function getRules(){
     var request = new XMLHttpRequest;
+    request.open("GET", "?format=json", true);
     request.onreadystatechange = function() {
-        if(request.readyState == 4){
-            var rulesObj =  JSON.parse(request.responseText);
-            buildForm(rulesObj);
+        if(request.readyState == request.DONE){
+            buildForm(JSON.parse(request.responseText));
         }
     };
-    request.open("GET", "?format=json", true);
     request.send(null);
 };
 

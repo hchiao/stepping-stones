@@ -1,7 +1,7 @@
 <h1>Client Form</h1>
 <p><%#= @rules.map{|x| x.lnr} %></p>
 
-<%= helper_link @rules %>
+<%= helper_link %>
 <%= form_tag :action => 'parse_client', :method => 'post' do %>
     <ul id="org"></ul>
     <%= submit_tag("Submit") %>
