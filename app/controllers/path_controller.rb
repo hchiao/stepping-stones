@@ -15,7 +15,7 @@ class PathController < ApplicationController
         session[:rules] = rules
         redirect_to path_client_form_path
     rescue IndexError => e
-        logger.error "Error: " + e
+        logger.error "Error: " + e.to_s
         redirect_to path_customize_path_path, notice: "Error input: Please fill in all branchs."
     end
   end

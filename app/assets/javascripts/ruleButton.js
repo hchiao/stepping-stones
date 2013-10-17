@@ -102,8 +102,9 @@ function createSelect(name, count) {
     select.setAttribute(ID, name);
     select.setAttribute(NAME, name);
     select.setAttribute(COUNT, count);
+    select.required = true;
     select.style.width = SELECT_WIDTH;
-    select.appendChild(createOption(PICK_NAME, PICK_VALUE));
+    select.appendChild(createOption(PICK_NAME, ""));
     select.appendChild(createOption(RULE_NAME, RULE_VALUE));
     select.appendChild(createOption(ANS_NAME, ANS_VALUE));
 
