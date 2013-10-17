@@ -134,15 +134,16 @@ function newAns(parent) {
 };
 
 var ANSWER = "Then this happends.....";
+var A = "a"
 function addAns(appendTo, pastName) {
     appendTo.appendChild(createAnsLi(pastName));
 };
 
 function createAnsLi(pastName) {
     var li = document.createElement(LI);
-    li.setAttribute(ID, pastName + ANSWER);
-    li.setAttribute(NAME, pastName + ANSWER);
+    li.setAttribute(ID, pastName + A);
+    li.setAttribute(NAME, pastName + A);
     li.setAttribute(CLASS, currentLevel(pastName));
-    li.appendChild(createText(pastName + ANSWER, ANSWER));
+    li.appendChild(createText(pastName + A, ANSWER));
     return li;
 };

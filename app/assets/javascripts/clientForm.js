@@ -22,7 +22,7 @@ function buildForm(rulesObj){
 
 function newQuestion(appendTo, pastName, rulesObj){
     var li = liTag(pastName);
-    var condition = findValue(pastName+"c", rulesObj);
+    var condition = findValue(pastName + "c", rulesObj);
     if (condition == undefined) {
         var answer = findValue(pastName + "a", rulesObj);
         //alert(answer);
