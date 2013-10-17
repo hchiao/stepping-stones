@@ -12,12 +12,12 @@ class PathController < ApplicationController
   def parse_path
     begin
         rules = DynamicPath.new.parse(params)
+        session[:rules] = rules
+        redirect_to path_client_form_path
     rescue IndexError => e
-        puts "==============================================="
-        puts "Deal with indexerror exception:"+e.to_s
+        logger.error "Error: " + e
+        redirect_to path_customize_path_path, notice: "Error input: Please fill in all branchs."
     end
-    session[:rules] = rules
-    redirect_to path_client_form_path
   end
 
   def client_form

@@ -1,9 +1,9 @@
 <h1>Create Rules</h1>
 
+<p id="notice"><%= notice %></p>
+
 <%= form_tag :action => 'parse_path', :method => 'post' do %>
     <INPUT type="button" value="Add Rule" onclick="initRule(org)" />
     <div id="org"></div>
     <%= submit_tag("Submit") %>
 <% end%>
-
-<%= link_to 'Back', path_show_path_path %>
