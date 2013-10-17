@@ -11,7 +11,7 @@ var NAME = "name";
 var TEXT = "text";
 var BR = "br";
 var CONDITION = "c";
-var CONDITION_VALUE = "Condition Value";
+var CONDITION_VALUE = "When this happens.....";
 var SELECT_TRUE = "t";
 var SELECT_FALSE = "f";
 
@@ -34,14 +34,14 @@ function createRuleLi(count, pastName) {
     li.setAttribute(CLASS, currentLevel(pastName));
     var elements = []
 
-    elements.push(createLabel("Condition: "));
+    //elements.push(createLabel("Condition: "));
     elements.push(createText(pastName + CONDITION + count, CONDITION_VALUE));
     elements.push(document.createElement(BR));
-    elements.push(createLabel("True:"));
+    elements.push(createLabel("If true:"));
     elements.push(createSelect(pastName + SELECT_TRUE + count, count));
     elements.push(document.createElement(BR));
     elements.push(createUl(pastName + SELECT_TRUE + count + UL));
-    elements.push(createLabel("False:"));
+    elements.push(createLabel("If false:"));
     elements.push(createSelect(pastName + SELECT_FALSE + count, count));
     elements.push(createUl(pastName + SELECT_FALSE + count + UL));
 
@@ -133,7 +133,7 @@ function newAns(parent) {
     addAns(appendTo, parent);
 };
 
-var ANSWER = "a";
+var ANSWER = "Then this happends.....";
 function addAns(appendTo, pastName) {
     appendTo.appendChild(createAnsLi(pastName));
 };
