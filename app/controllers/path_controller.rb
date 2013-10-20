@@ -12,6 +12,7 @@ class PathController < ApplicationController
   def parse_path
     begin
         rules = DynamicPath.new.parse(params)
+        PathToDb.new.toDb rules
         session[:rules] = rules
         redirect_to path_client_form_path
     rescue IndexError => e
