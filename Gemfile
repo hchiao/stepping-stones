@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
-
+gem 'pg'
+gem 'acts_as_sane_tree'
 gem 'execjs'
 gem 'therubyracer', :platforms => :ruby
 
