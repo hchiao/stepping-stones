@@ -11,6 +11,7 @@ class DynamicPath
         ruleValidTo = (1..Inf).each {|x| break x-1 if hash.member?("r" + x.to_s + "c1") == false }
         ruleNames = (1..ruleValidTo).map { |x| "r" + x.to_s }
         rules = ruleNames.map {|x| makeRule x, 1, hash }
+        Rails.logger.debug "Made Rules from form."
         rules
     end
 

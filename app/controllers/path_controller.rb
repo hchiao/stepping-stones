@@ -12,8 +12,9 @@ class PathController < ApplicationController
   def parse_path
     begin
         rules = DynamicPath.new.parse(params)
+
         PathToDb.new.to_db rules
-        session[:rules] = rules
+        #session[:rules] = rules
 
         redirect_to path_client_form_path
     rescue IndexError => e
@@ -26,8 +27,8 @@ class PathController < ApplicationController
     respond_to do |format|
         format.html
         format.json do
-            DbToPath.new.to_path  # TODO need to catch exception when query db
-            @rules = session[:rules]
+            @rules = DbToPath.new.to_path  # TODO need to catch exception when query db
+            #@rules = session[:rules]
             render json: @rules.to_json
         end
     end
