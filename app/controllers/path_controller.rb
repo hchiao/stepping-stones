@@ -13,6 +13,9 @@ class PathController < ApplicationController
     begin
         rules = DynamicPath.new.parse(params)
 
+        puts "===================================================="
+        puts "recipe_name = "+params[:recipe_name]
+
         PathToDb.new.to_db rules
         #session[:rules] = rules
 
