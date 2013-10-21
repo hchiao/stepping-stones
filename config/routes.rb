@@ -1,4 +1,6 @@
 SteppingStones::Application.routes.draw do
+  resources :recipes
+
   get "path/show_path"
   get "path/customize_path"
   get "path/client_form"
