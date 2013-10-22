@@ -1,5 +1,5 @@
 module PathHelper
-    def helper_link
+    def helper_load_recipe
         script = "
             var ready = function() {
                 getRules();

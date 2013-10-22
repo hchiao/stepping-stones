@@ -1,6 +1,7 @@
 <h1>Recipe Survey</h1>
 
-<%= helper_link %>
+<%= helper_load_recipe %>
+
 <%= form_tag :action => 'parse_client', :method => 'post' do %>
     <ul id="org"></ul>
     <%= submit_tag("Submit") %>

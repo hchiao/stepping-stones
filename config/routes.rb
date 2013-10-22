@@ -7,7 +7,7 @@ SteppingStones::Application.routes.draw do
   post "path/parse_path"
   post "path/parse_client"
 
-  root "path#customize_path"
+  root "recipes#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

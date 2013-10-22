@@ -12,12 +12,11 @@ class PathController < ApplicationController
   def parse_path
     begin
         rules = DynamicPath.new.parse(params)
-
         recipe_name = params[:recipe_name]
         PathToDb.new.to_db(recipe_name, rules)
         #session[:rules] = rules
 
-        redirect_to path_client_form_path
+        redirect_to recipes_path
     rescue IndexError => e
         logger.error "Error: " + e.to_s
         redirect_to path_customize_path_path, notice: "Error input: Please fill in all branchs."
@@ -25,9 +24,13 @@ class PathController < ApplicationController
   end
 
   def client_form
+    #@view_recipe = params[:view_recipe]
+    @view_recipe = Recipe.all
     respond_to do |format|
         format.html
         format.json do
+            puts "======================================="
+            puts "v: " + @view_recipe
             @rules = DbToPath.new.to_path  # TODO need to catch exception when query db
             #@rules = session[:rules]
             render json: @rules.to_json
