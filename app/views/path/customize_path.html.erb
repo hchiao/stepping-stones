@@ -4,7 +4,7 @@
 
 <%= form_tag :action => 'parse_path', :method => 'post' do %>
 
-    Recipe Name: <%= text_field_tag :recipe_name, :required => true%>
+    Recipe Name: <%= text_field_tag :recipe_name, nil, :required => true%>
     <br>
 
     <INPUT type="button" value="Add Rule" onclick="initRule(org)" />

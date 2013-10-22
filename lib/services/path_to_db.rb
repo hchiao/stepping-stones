@@ -1,17 +1,18 @@
 class PathToDb
-    def to_db rules
-        store_rules(rules)
+    def to_db(recipe_name, rules)
+        store_rules(recipe_name, rules)
         Rails.logger.debug "Stored Rules object to database."
     end
 
     private
 
-    def store_rules rules
-        rules.each {|rule| store_rule rule}
+    def store_rules(recipe_name, rules)
+        recipe = Recipe.create(name: recipe_name)
+        rules.each {|rule| store_rule(recipe, rule)}
     end
 
-    def store_rule rule_data
-        root_node = Rule.create(extract_hash(rule_data))
+    def store_rule(recipe, rule_data)
+        root_node = recipe.rules.create(extract_hash(rule_data))
         make_branches(root_node, rule_data)
     end
 
