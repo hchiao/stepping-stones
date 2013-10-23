@@ -1,6 +1,8 @@
 <h1>Recipe Survey</h1>
 
-<%= helper_load_recipe %>
+<%= csrf_meta_tag %>
+<%= helper_load_recipe @recipe_num %>
+
 
 <%= form_tag :action => 'parse_client', :method => 'post' do %>
     <ul id="org"></ul>

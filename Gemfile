@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+gem 'awesome_print'
 gem 'pg'
 gem 'acts_as_sane_tree'
 gem 'execjs'

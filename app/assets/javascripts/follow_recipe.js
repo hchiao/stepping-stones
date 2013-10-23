@@ -3,15 +3,20 @@ var NAME = "name";
 var UL = "ul";
 var LI = "li";
 
-function getRules(){
+
+function getRules(recipe_num){
     var request = new XMLHttpRequest;
-    request.open("GET", "?format=json", true);
+    request.open("POST", "/path/rules_json?format=json", true);
+    var token = $("meta[name='csrf-token']").attr("content");
+    request.setRequestHeader("X-CSRF-Token", token);
     request.onreadystatechange = function() {
         if(request.readyState == request.DONE){
+            //alert(request.responseText);
             buildForm(JSON.parse(request.responseText));
         }
     };
-    request.send(null);
+    //request.send(null);
+    request.send("recipe_num=" + recipe_num);
 };
 
 function buildForm(rulesObj){

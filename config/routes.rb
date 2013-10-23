@@ -6,6 +6,7 @@ SteppingStones::Application.routes.draw do
   get "path/client_form"
   post "path/parse_path"
   post "path/parse_client"
+  post "path/rules_json"
 
   root "recipes#index"
   # The priority is based upon order of creation: first created -> highest priority.
