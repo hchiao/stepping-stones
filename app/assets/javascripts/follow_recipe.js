@@ -9,14 +9,13 @@ function getRules(recipe_num){
     request.open("POST", "/path/rules_json?format=json", true);
     var token = $("meta[name='csrf-token']").attr("content");
     request.setRequestHeader("X-CSRF-Token", token);
+    request.setRequestHeader("recipe_num",recipe_num);
     request.onreadystatechange = function() {
         if(request.readyState == request.DONE){
-            //alert(request.responseText);
             buildForm(JSON.parse(request.responseText));
         }
     };
-    //request.send(null);
-    request.send("recipe_num=" + recipe_num);
+    request.send(null);
 };
 
 function buildForm(rulesObj){

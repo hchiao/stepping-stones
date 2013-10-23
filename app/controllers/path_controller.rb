@@ -25,21 +25,12 @@ class PathController < ApplicationController
 
   def client_form
     @recipe_num = params[:view_recipe]
-    respond_to do |format|
-        format.html
-        format.json do
-            @rules = DbToPath.new.to_path  # TODO GET json
-            #@rules = session[:rules]
-            render json: @rules.to_json
-        end
-    end
+    respond_to {|format| format.html}
   end
 
   def rules_json
-      puts "=========================================="
-      puts session.inspect
-      puts params.inspect
-      @rules = DbToPath.new.to_path 8  # TODO need to catch exception when query db
+      recipe_num =  request.headers[:HTTP_RECIPE_NUM]
+      @rules = DbToPath.new.to_path recipe_num.to_i  # TODO need to catch exception when query db
       respond_to {|format| format.json{render json: @rules.to_json}}
   end
 
