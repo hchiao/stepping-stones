@@ -1,7 +1,8 @@
 class DbToPath
-    def to_path
+    def to_path recpie_num
         roots_array = Rule.all.select {|rule| rule.root?}
-        rules = roots_array.map {|root| make_rule root}
+        recipe_rules = roots_array.select {|rule| rule.recipe_id == recpie_num}
+        rules = recipe_rules.map {|root| make_rule root}
         Rails.logger.debug "Extracted rules from db"
         return rules
     end
