@@ -123,6 +123,7 @@ function radioTag(pastName, value, rulesObj){
     radioInput.setAttribute('type', 'radio');
     radioInput.setAttribute('name', pastName);
     radioInput.setAttribute('value', value);
+    radioInput.required = true;
 
     radioInput.onclick = (function() {
                               return function(){

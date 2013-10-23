@@ -39,7 +39,7 @@ class PathController < ApplicationController
       puts "=========================================="
       puts session.inspect
       puts params.inspect
-      @rules = DbToPath.new.to_path 7  # TODO need to catch exception when query db
+      @rules = DbToPath.new.to_path 8  # TODO need to catch exception when query db
       respond_to {|format| format.json{render json: @rules.to_json}}
   end
 
