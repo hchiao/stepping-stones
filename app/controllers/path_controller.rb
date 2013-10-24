@@ -29,7 +29,11 @@ class PathController < ApplicationController
   end
 
   def rules_json
-      recipe_num =  request.headers[:HTTP_RECIPE_NUM]
+      #Rails.logger.info request.inspect
+      #recipe_num =  request.headers[:HTTP_RECIPE_NUM]
+      recipe_num =  request.headers[:HTTP_X_RECIPE]
+      Rails.logger.info "==========================================="
+      Rails.logger.info recipe_num
       @rules = DbToPath.new.to_path recipe_num.to_i  # TODO need to catch exception when query db
       respond_to {|format| format.json{render json: @rules.to_json}}
   end
