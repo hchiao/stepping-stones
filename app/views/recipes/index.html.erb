@@ -1,30 +1,18 @@
 <h1>Listing Recipes</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+<%= link_to 'New Recipe', path_customize_path_path, :'data-role' => "button", :'data-theme' => "b"  %>
 
-  <tbody>
+<ul data-role="listview" data-filter="true" data-filter-placeholder="Search by name...." data-inset="true">
     <% @recipes.each do |recipe| %>
-      <tr>
-        <td><%= recipe.name %></td>
         <!--
+        <td><%#= recipe.name %></td>
         <td><%#= link_to 'Show', recipe %></td>
         <td><%#= link_to 'Edit', edit_recipe_path(recipe) %></td>
         <td><%#= link_to 'Destroy', recipe, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         -->
-        <td><%= link_to 'Follow Recipe', path_client_form_path(:view_recipe => recipe), class: "ui-button" %></td>
-      </tr>
+        <li><%= link_to recipe.name, path_client_form_path(:view_recipe => recipe), class: "ui-button" %></li>
     <% end %>
-  </tbody>
-</table>
+</ul>
 
 <br>
 
-<%= link_to 'New Recipe', path_customize_path_path  %>
