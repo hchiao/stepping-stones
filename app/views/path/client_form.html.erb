@@ -3,10 +3,10 @@
 <%= csrf_meta_tag %>
 <%= helper_load_recipe @recipe_num %>
 
+<%= link_to 'List Recipes', recipes_path, :'data-role' => "button", :'data-theme' => "b" %>
 
 <%= form_tag :action => 'parse_client', :method => 'post' do %>
     <ul id="org"></ul>
     <%= submit_tag("Submit") %>
 <%end%>
 
-<%= link_to 'List Recipes', recipes_path %>

@@ -125,11 +125,12 @@ function getLevel(path){
 function radioTag(pastName, value, rulesObj){
     var radioInput = document.createElement('input');
     radioInput.setAttribute('type', 'radio');
-    radioInput.setAttribute('id', pastName);
+    //radioInput.setAttribute('id', pastName);
+    radioInput.setAttribute('name', pastName);
     radioInput.setAttribute('value', value);
     radioInput.required = true;
 
-    radioInput.setAttribute('name', 'radio-choice-0');
+    //radioInput.setAttribute('name', 'radio-choice-0');
 
     radioInput.onclick = (function() {
                               return function(){
